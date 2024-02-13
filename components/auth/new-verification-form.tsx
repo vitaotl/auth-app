@@ -4,16 +4,36 @@ import { CardWrapper } from "./card-wrapper"
 import { BeatLoader } from "react-spinners"
 
 import { useSearchParams } from "next/navigation"
-import { useCallback, useEffect } from "react"
+import { useCallback, useEffect, useState } from "react"
+import { newVerification } from "@/actions/new-verification"
+import FormSuccess from "../form-success"
+import FormError from "../form-error"
 
 const NewVerificationForm: React.FC = () => {
+  const [error, setError] = useState<string | undefined>(undefined)
+  const [success, setSuccess] = useState<string | undefined>(undefined)
+
   const searchParams = useSearchParams()
 
   const token = searchParams.get("token")
 
   const onSubmit = useCallback(() => {
-    console.log(token)
-  }, [token])
+    if (success || error) return
+
+    if (!token) {
+      setError("Missing token")
+      return
+    }
+
+    newVerification(token)
+      .then((data) => {
+        setSuccess(data.success)
+        setError(data.error)
+      })
+      .catch(() => {
+        setError("Something went wrong")
+      })
+  }, [token, success, error])
 
   useEffect(() => {
     onSubmit()
@@ -26,7 +46,9 @@ const NewVerificationForm: React.FC = () => {
       backButtonHref="/auth/login"
     >
       <div className="flex items-center w-full justify-center">
-        <BeatLoader />
+        {!error && !success && <BeatLoader />}
+        {!success && <FormError message={error} />}
+        <FormSuccess message={success} />
       </div>
     </CardWrapper>
   )
