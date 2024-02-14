@@ -25,6 +25,10 @@ export default function Home() {
           Auth
         </h1>
         <p className="text-white text-lg">A simple authentication service</p>
+        <div className="work-in-progress-container">
+          <p className="text-white text-lg work-in-progress">Work in progress...</p>
+        </div>
+
         <div>
           <LoginButton>
             <Button variant="secondary" size="lg">
