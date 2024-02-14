@@ -3,9 +3,13 @@
 Auth App is a robust Fullstack authentication system designed to provide secure access control and user management features for web applications. It offers a range of functionalities including Two Factor Authentication, Forgot Password, Role Based Access Control (RBAC), Credentials Provider, Email Verification, and Middlewares for seamless integration.
 
 ## Table of Contents
+- [Live Demo](#live-demo)
 - [Features](#features)
 - [Installation](#installation)
 - [License](#license)
+
+## Live Demo
+- **https://auth-app-ruby-sigma.vercel.app/**
 
 ## Features
 
